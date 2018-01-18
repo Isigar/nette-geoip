@@ -1,0 +1,22 @@
+
+<style>
+    #nette-debug .nette-geoipPanel,
+    #tracy-debug .nette-geoipPanel { min-width: 700px; }
+    #nette-debug .nette-geoipPanel h2,
+    #tracy-debug .nette-geoipPanel h2 { font-size: 22px; font-weight: bold; }
+    #nette-debug .nette-geoipPanel table,
+    #tracy-debug .nette-geoipPanel table { width: 100%; }
+    #nette-debug .nette-geoipPanel table th,
+    #tracy-debug .nette-geoipPanel table th { width: 80px; }
+</style>
+
+<h1>Queries: <?php echo $esc(count($this->calls)); ?>, time: <?php echo $esc($totalTime); ?> </h1>
+<div class="nette-inner tracy-inner nette-geoipPanel">
+    <?php foreach($this->calls as $call): ?>
+        <h2><?php echo $esc((string) $call->key); ?></h2>
+        <table>
+            <tr><th>Time</th><td><?php echo $esc(number_format($call->time * 1000, 2, '.', ' ')) ?>&nbsp;ms</td></tr>
+            <tr><th>Response</th><td><?php echo $click($call->result) ?></td></tr>
+        </table>
+    <?php endforeach; ?>
+</div>
